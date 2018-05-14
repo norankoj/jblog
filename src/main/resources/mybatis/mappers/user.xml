@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+ 
+  <!-- 쿼리문 작성 -->
+  
+  <insert id="insert" parameterType="UserVO">
+  <![CDATA[
+  
+   insert into users 
+   values (seq_users_no.NEXTVAL
+           ,#{id} 
+	       ,#{userName}
+	       ,#{password}
+	       ,SYSDATE
+	       )
+  ]]>
+    </insert>
+  
+  <insert id="cinsert" parameterType="CategoryVO">
+  <![CDATA[
+  
+   insert into category 
+   values (seq_category_no.NEXTVAL
+           ,#{id} 
+	       ,#{cateName}
+	       ,#{description}
+	       ,SYSDATE
+	       )
+  ]]>
+    </insert>
+  
+   <insert id="binsert" parameterType="BlogVO">
+  <![CDATA[
+  
+   insert into blog
+   values (#{id} 
+	       ,#{blogTitle}
+	       ,#{logoFile}
+	       )
+  ]]>
+  
+  
+  </insert>
+
+  <select id="selectUser" parameterType="UserVO" resultType="UserVO">
+  <![CDATA[
+      Select userNo, userName, id
+      from users
+      where id=#{id} and password=#{password}
+  ]]>
+  </select>
+  
+   <select id="selectblog" parameterType="String" resultType="BlogVO">
+  <![CDATA[
+      Select id, blogTitle, logoFile
+      from blog
+      where id=#{id}
+  ]]>
+  </select>
+  
+   <select id="selectCate" parameterType="String" resultType="CategoryVO">
+  <![CDATA[
+      Select cateNo,id,cateName,description,regDate
+      from category
+      where id=#{id}
+  ]]>
+  </select>
+  
+   <select id="selectid" parameterType="String" resultType="UserVO">
+  <![CDATA[
+      Select userNo, userName, id
+      from users
+      where id=#{id}
+  ]]>
+  </select>
+  
+
+</mapper>
