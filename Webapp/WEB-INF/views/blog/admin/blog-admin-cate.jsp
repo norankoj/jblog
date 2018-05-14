@@ -125,7 +125,7 @@ function render(CategoryVO, updown){
     str +="    <td>"+CategoryVO.cateName+"</td>";
     str +="    <td>0</td>";
     str +="    <td>"+CategoryVO.description+"</td>";
-    str +="    <td><img src='${pageContext.request.contextPath}/assets/images/delete.jpg' class='del' data-p data-cateNo="+CategoryVO.cateNo+"></td>";
+    str +="    <td><img src='${pageContext.request.contextPath}/assets/images/delete.jpg' class='del' data-postnum='' data-cateNo="+CategoryVO.cateNo+"></td>";
     str +="</tr>";
     
     if(updown =="up"){

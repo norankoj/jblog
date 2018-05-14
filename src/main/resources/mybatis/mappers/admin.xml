@@ -4,83 +4,6 @@
 
 <mapper namespace="admin">
     
-   <!-- <update id="update" parameterType="BlogVO">
-    <![CDATA[
-        UPDATE blog
-        ]]>
-         <if test="logoFile!=null">
-    <![CDATA[
-         SET blogTitle=#{blogTitle}
-               ,logoFile=#{logoFile}
-               WHERE id=#{id}
-    ]]>
-    </if>
-    </update>  -->
-   <update id="update" parameterType="BlogVO">
-    <![CDATA[
-        UPDATE blog
-        SET blogTitle=#{blogTitle}
-            ,logoFile=#{logoFile}
-             WHERE id=#{id}
-    ]]>
-    </update> 
-
-    
-    
-     <insert id="cinsert" parameterType="CategoryVO">
-     
-        <selectKey keyProperty="cateNo" resultType="int" order="BEFORE">
-           select seq_category_no.NEXTVAL from dual
-        </selectKey>
-           <![CDATA[
-                insert into category 
-                values (#{cateNo}
-                       ,#{id} 
-	                   ,#{cateName}
-	                   ,#{description}
-	                   ,SYSDATE
-	                    )
-                ]]>
-      </insert>
-    
-    <select id="selectbyCateNO" parameterType="int" resultType="CategoryVO">
-     <![CDATA[
-         Select cateNo,id, cateName,description,regDate
-         from category
-         where cateNo=#{cateNo}
-             ]]>
-    </select>
-    
-      <insert id="insertPost" parameterType="PostVO">
-           <![CDATA[
-                insert into post 
-                values (seq_post_no.NEXTVAL
-                       ,#{cateNo} 
-	                   ,#{postTitle}
-	                   ,#{postContent}
-	                   ,SYSDATE
-	                    )
-                ]]>
-      </insert>
-        
-     <select id="plist" parameterType="int" resultType="PostVO">
-       <![CDATA[
-               Select postNo,cateNo,postTitle,postContent,regDate
-               from post
-               where cateNo=#{cateNo}
-               order by postNo desc
-             ]]>
-     </select>
-     
-     <select id="pselect" parameterType="int" resultType="PostVO">
-       <![CDATA[
-             Select postNo, postTitle,postContent,regDate
-               from post
-               where postNo=#{postNo}
-             ]]>
-     </select>
-     
-     
      <insert id="cmtinsert" parameterType="CommentsVO">
      
         <selectKey keyProperty="cmtNo" resultType="int" order="BEFORE">
@@ -113,4 +36,10 @@
              ]]>
      
      </select>
+     
+ <!--     <insert id="insertPostNum" >
+     
+     
+     </insert>
+  -->
 </mapper>

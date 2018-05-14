@@ -17,6 +17,7 @@ public class PostService {
 		
 		int no = dao.insertPost(vo);
 		System.out.println(no+"포스트 등록완료");
+		//dao.insertPostNum(vo.getPostNo()+no);
 	}
 	
 	public List<PostVO> plist(int cateNo){

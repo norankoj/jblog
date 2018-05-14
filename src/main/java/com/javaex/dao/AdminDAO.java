@@ -19,7 +19,7 @@ public class AdminDAO {
 
 	public int update(BlogVO vo) {
 
-		return sqlsession.update("admin.update", vo);
+		return sqlsession.update("blog.update", vo);
 	}
 
 	public BlogVO select(String id) {
@@ -29,7 +29,7 @@ public class AdminDAO {
 
 	public int add(CategoryVO vo) {
 		System.out.println(vo.toString());
-		sqlsession.insert("admin.cinsert", vo);
+		sqlsession.insert("category.cinsert", vo);
 		System.out.println(vo.toString());
 		return vo.getCateNo();
 	}
@@ -44,7 +44,7 @@ public class AdminDAO {
 
 	public CategoryVO selectCate(int cateNO) {
 
-		return sqlsession.selectOne("admin.selectbyCateNO", cateNO);
+		return sqlsession.selectOne("category.selectbyCateNO", cateNO);
 	}
 	public List<CategoryVO> clist(String id) {
 		
@@ -53,7 +53,7 @@ public class AdminDAO {
 
 	public CommentsVO selectCmt(int cmtNo) {
 
-		return sqlsession.selectOne("admin.selectbyCmtNO", cmtNo);
+		return sqlsession.selectOne("category.selectbyCmtNO", cmtNo);
 	}
 
 	public List<CommentsVO> cmtlist() {
@@ -63,16 +63,20 @@ public class AdminDAO {
 
 	public int insertPost(PostVO vo) {
 
-		return sqlsession.insert("admin.insertPost", vo);
+		return sqlsession.insert("post.insertPost", vo);
 	}
 
 	public List<PostVO> plist(int cateNo) {
 
-		return sqlsession.selectList("admin.plist", cateNo);
+		return sqlsession.selectList("post.plist", cateNo);
 	}
 
 	public PostVO pselect(int cateNo) {
-		return sqlsession.selectOne("admin.pselect", cateNo);
+		return sqlsession.selectOne("post.pselect", cateNo);
 	}
+	
+	/*public void insertPostNum(int no) {
+		return sqlsession.insert("admin.insertPostNum",no);
+	}*/
 
 }

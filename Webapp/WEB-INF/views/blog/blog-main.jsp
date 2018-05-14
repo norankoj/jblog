@@ -40,9 +40,9 @@
                  <td><input type='text' name='comment' value='' style='width:100%; border:none a'></td><td></td>
                  <td><input type='button' id='commentPush' name='commentPush' value='저장'></td>
                  </tr>
-                 <tr>
+                <%--  <tr>
                  <td>${bvo.userName}</td>
-                 </tr>
+                 </tr> --%>
                  </table>
                 </div>
                 </c:if>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="post">
+
+<insert id="insertPost" parameterType="PostVO">
+           <![CDATA[
+                insert into post 
+                values (seq_post_no.NEXTVAL
+                       ,#{cateNo} 
+	                   ,#{postTitle}
+	                   ,#{postContent}
+	                   ,SYSDATE
+	                    )
+                ]]>
+                
+      </insert>
+      
+      <select id="plist" parameterType="int" resultType="PostVO">
+       <![CDATA[
+               Select postNo,cateNo,postTitle,postContent,regDate
+               from post
+               where cateNo=#{cateNo}
+               order by postNo desc
+             ]]>
+     </select>
+     
+       <select id="pselect" parameterType="int" resultType="PostVO">
+       <![CDATA[
+             Select postNo, postTitle,postContent,regDate
+               from post
+               where postNo=#{postNo}
+             ]]>
+     </select>
+     
+</mapper>
