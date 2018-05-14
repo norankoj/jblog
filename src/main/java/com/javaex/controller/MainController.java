@@ -3,7 +3,6 @@ package com.javaex.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import com.javaex.vo.BlogVO;
 import com.javaex.vo.CategoryVO;
 import com.javaex.vo.CommentsVO;
 import com.javaex.vo.PostVO;
-import com.javaex.vo.UserVO;
 
 
 @Controller
@@ -79,19 +77,17 @@ public class MainController {
 	
 	@ResponseBody
 	@RequestMapping("/{id}/comment")
-	public CommentsVO cmt(CommentsVO vo, HttpSession session,UserVO uvo) {
+	public CommentsVO cmt(CommentsVO vo) {
+		System.out.println(vo);
 		CommentsVO cmtvo = commentservice.cmt(vo);
-		//System.out.println("아이디 확인"+uvo.getUserName());
-		//session.setAttribute("authUser", uvo.getUserName());
+		System.out.println("들어와줘"+vo);
 		return cmtvo;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/{id}/comment/list")
-	public List<CommentsVO> list(CommentsVO cmtvo,HttpSession session){
-		List<CommentsVO> cmtlist = commentservice.selectcmt();
-		//조인해야되는거 아는데 다음에 할께요..
-		return cmtlist;
+	public List<CommentsVO> list(CommentsVO cmtvo){
+		return commentservice.selectcmt();
 	}
 	
 	}

@@ -36,6 +36,8 @@ public class AdminDAO {
 	
 	public int addCmt(CommentsVO vo) {
 		
+		System.out.println("포스트 조인 알아보기"+vo);
+		
 		sqlsession.insert("admin.cmtinsert",vo);
 		
 		return vo.getCmtNo();
@@ -52,8 +54,9 @@ public class AdminDAO {
 	}
 
 	public CommentsVO selectCmt(int cmtNo) {
+		System.out.println("cmt번호"+cmtNo);
 
-		return sqlsession.selectOne("category.selectbyCmtNO", cmtNo);
+		return sqlsession.selectOne("admin.selectbyCmtNO", cmtNo);
 	}
 
 	public List<CommentsVO> cmtlist() {

@@ -37,12 +37,14 @@
 				<table style='border: 1px black solid; width:100%'> 
                  <tr>
                  <td>${authUser.userName}</td>
-                 <td><input type='text' name='comment' value='' style='width:100%; border:none a'></td><td></td>
+                 <td><input type='text' name='comment' value='' style='width:100%; border:none a'></td>
+                 <td><input type="hidden" name='cmtPostNo' value='${pvo.postNo }' style='width:100%; border:none a'></td>
+                 <td><input type="hidden" name='cmtUserNo' value='${authUser.userNo}' style='width:100%; border:none a'></td>
+                 <td><input type="hidden" name='cmtUserName' value='${authUser.userName}' style='width:100%; border:none a'></td>
                  <td><input type='button' id='commentPush' name='commentPush' value='저장'></td>
                  </tr>
-                <%--  <tr>
-                 <td>${bvo.userName}</td>
-                 </tr> --%>
+                 </table>
+                 <table> 
                  </table>
                 </div>
                 </c:if>
@@ -91,7 +93,7 @@ function List(){
            //요청할때
            url : "${pageContext.request.contextPath }/{id}/comment/list", 
            type : "post",
-         //  data : {id:id},  
+           //  data : {id:id},  
            
            //응답받을때
            dataType : "json",
@@ -110,18 +112,21 @@ function List(){
 
 $("#commentPush").on("click", function(){
 	    
-	    var cmtComment = $("[name=comment]").val();
+	    var PostNo = $("[name=cmtPostNo]").val();
+	    var userNo = $("[name=cmtUserNo]").val();
+	    var cmtContent = $("[name=comment]").val();
 
 	    
 	    $.ajax({
 	           //요청할때
 	           url : "${pageContext.request.contextPath }/{id}/comment", 
 	           type : "post",
-	           data : {cmtComment:cmtComment},  
+	           data : {postNo:PostNo,userNo:userNo,cmtContent:cmtContent}, 
+	           
 	           dataType : "json",
 	           success : function(cmtvo) {
 	                  console.log(cmtvo);
-	                  render(cmtvo,"up");
+	                  render(cmtvo,"down");
 	                  $("[name=comment]").val("");
 	                  
 	           },
@@ -133,12 +138,13 @@ $("#commentPush").on("click", function(){
 
 function render(CmtVO, updown){
     var str = "";
+    //str +="<table style='border: 1px black solid; width:100%'> ";
     str +="    <tr>";
-    str +="      <td>"+authUser+"</td>";
+    str +="      <td>"+CmtVO.userName+"</td>";
     str +="      <td>"+CmtVO.cmtContent+"</td>";
     str +="      <td>"+CmtVO.regDate+"</td>";
     str +="    </tr>";
-    str +="</table>";
+   // str +="</table>";
     
     if(updown =="up"){
            $("#comm").prepend(str);

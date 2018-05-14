@@ -20,26 +20,25 @@
                 ]]>
       </insert>
      
-     <select id="selectbyCmtNO" parameterType="CommentsVO" resultType="CommentsVO">
+     <select id="selectbyCmtNO" parameterType="int" resultType="CommentsVO">
       <![CDATA[
-             Select cmtNo, postNo,userNo,cmtContent,regDate
-               from comments
-               where postNo=#{cmtNo}
+              Select c.cmtNo, c.postNo,c.cmtContent,c.regDate,u.userName
+               from comments c, users u
+               where c.userNo = u.userNo
+               and cmtNo=#{cmtNo}
              ]]>
      
      </select>
      
      <select id="selectCmt" resultType="CommentsVO">
       <![CDATA[
-             Select cmtNo, postNo,userNo,cmtContent,regDate
-               from comments
+             Select c.cmtNo, c.postNo,c.cmtContent,c.regDate,u.userName
+               from comments c, users u
+               where c.userNo = u.userNo
+               order by cmtNo desc
+
              ]]>
      
      </select>
      
- <!--     <insert id="insertPostNum" >
-     
-     
-     </insert>
-  -->
 </mapper>
